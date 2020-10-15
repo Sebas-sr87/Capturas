@@ -189,11 +189,12 @@ function cambiarImagen() {
                 var nombrecompleto = nombre + " " + apellido;
                 if (diferencia_minutos > 3 & diferencia_minutos <= 10) {
 
-                    notificaciones(nombrecompleto);
+//                    notificaciones(nombrecompleto);
+                    enviarCorreo(nombrecompleto,id_usuario,1)
 
                 } else if (diferencia_minutos == 12) {
                     console.log("Mandar el correo por " + nombrecompleto+ " id_usuario:"+id_usuario);
-                    enviarCorreo(nombrecompleto,id_usuario,diferencia_minutos)
+                    enviarCorreo(nombrecompleto,id_usuario,2)
                 }
             }
 //            $('body').append('<div class="contenedores"><canvas id="grafico"></canvas></div>');

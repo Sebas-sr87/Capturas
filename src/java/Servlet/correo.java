@@ -45,26 +45,27 @@ public class correo extends HttpServlet {
             Boolean correo = request.getParameter("correo") == null ? Boolean.FALSE : Boolean.TRUE;
             if (correo) {
                 try {
-                    String cliente = request.getParameter("cliente") ;
-                    String usuario = request.getParameter("usuario") ;
+                    String cliente = request.getParameter("cliente");
+                    String usuario = request.getParameter("usuario");
                     int minutos = Integer.parseInt(request.getParameter("minutos"));
-                    String receptor="";
-                    String mensaje="";
-                    if(minutos==1){
-                      Usuario user = Query.traerUsuario(Integer.parseInt(usuario));
-                      receptor=user.getCorreo();
-                      mensaje="No has enviado capturas";
-                    }else if(minutos==2){
-                    receptor="srodriguez@adportas.cl";
-                    mensaje="El cliente "+cliente+" no ha enviado sus capturas hace mas de 10 minutos";
+                    String receptor = "";
+                    String mensaje = "";
+                    if (minutos == 1) {
+                        Usuario user = Query.traerUsuario(Integer.parseInt(usuario));
+                        receptor = user.getCorreo();
+                        mensaje = "No has enviado capturas";
+                    } else if (minutos == 2) {
+//                    receptor="srodriguez@adportas.cl";
+                        receptor = "daniel@adportas.cl";
+                        mensaje = "El cliente " + cliente + " no ha enviado sus capturas hace mas de 10 minutos";
                     }
-                  
+
                     EnviarEmail e = new EnviarEmail();
                     Object[] a = new Object[1];
                     a[0] = receptor;//para quien
                     String subject = "Informacion sobre las capturas";
                     String message = mensaje;
-                    String from = "srodriguez@adportas.cl";//quien lo manda
+                    String from = "daniel@adportas.cl";//quien lo manda
                     e.postMail(a, subject, message, 18399, 164, from);
                 } catch (Exception e) {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal server error: " + e.toString());;
